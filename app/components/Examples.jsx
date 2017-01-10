@@ -8,6 +8,6 @@ var Examples = React.createClass({
     }
 });
 */
-var Examples = () => <h3>Examples Components</h3>
+var Examples = () => <h3>Examples Component</h3>
 
 module.exports = Examples;

@@ -28213,7 +28213,7 @@
 	    return React.createElement(
 	        'h3',
 	        null,
-	        'Examples Components'
+	        'Examples Component'
 	    );
 	};
 
