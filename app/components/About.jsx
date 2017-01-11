@@ -17,6 +17,13 @@ var About =(props)=>{
             <h3>About Component</h3>
         );
 }*/
-var About = () =><h3>About component</h3>
+var About = () =>{
+    return (
+        <div>
+            <h3>About</h3>
+            <p>About Paragraph</p>
+        </div>
+    )
+};
 
 module.exports = About;
