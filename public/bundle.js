@@ -26535,9 +26535,16 @@
 	var Nav = React.createClass({
 	    displayName: 'Nav',
 
+
 	    onSearch: function onSearch(e) {
 	        e.preventDefault();
-	        alert('Not yet wired up!');
+	        var loc = this.refs.city.value;
+	        var encodedLoc = encodeURIComponent(loc);
+
+	        if (loc.length > 0) {
+	            this.refs.city.value = '';
+	            window.location.hash = "#/?loc=" + encodedLoc;
+	        }
 	    },
 	    render: function render() {
 	        return React.createElement(
@@ -26595,7 +26602,7 @@
 	                        React.createElement(
 	                            'li',
 	                            null,
-	                            React.createElement('input', { type: 'search', placeholder: 'Search Weather by City' })
+	                            React.createElement('input', { type: 'search', ref: 'city', placeholder: 'Search Weather by City' })
 	                        ),
 	                        React.createElement(
 	                            'li',
@@ -26636,12 +26643,14 @@
 
 	        this.setState({
 	            isLoading: true,
+	            loc: undefined,
+	            temp: undefined,
 	            errMsg: undefined
 	        });
 
 	        openWeatherMap.getTemp(loc).then(function (temp) {
 	            self.setState({
-	                location: loc,
+	                loc: loc,
 	                temp: temp,
 	                isLoading: false
 	            });
@@ -26652,9 +26661,31 @@
 	            });
 	        });
 	    },
+	    componentDidMount: function componentDidMount() {
+	        var loc = this.props.location.query.loc;
+	        console.log('this.props:', this.props);
+	        console.log('this.props.loc:', this.props.location);
+	        console.log('query:', this.props.location.query);
+	        console.log('loc:', loc);
+	        if (loc && loc.length > 0) {
+	            this.handleSearch(loc);
+	            window.location.hash = "#/";
+	        }
+	    },
+	    componentWillReceiveProps: function componentWillReceiveProps(newProps) {
+	        var loc = newProps.location.query.loc;
+	        console.log('this.props:', this.props);
+	        console.log('this.props.loc:', this.props.location);
+	        console.log('query:', this.props.location.query);
+	        console.log('loc:', loc);
+	        if (loc && loc.length > 0) {
+	            this.handleSearch(loc);
+	            window.location.hash = "#/";
+	        }
+	    },
 	    render: function render() {
 	        var theData = {};
-	        theData.location = this.state.location;
+	        theData.loc = this.state.loc;
 	        theData.temp = this.state.temp;
 	        theData.isLoading = this.state.isLoading;
 	        theData.errMsg = this.state.errMsg;
@@ -26666,7 +26697,7 @@
 	                    null,
 	                    'Fething weather...'
 	                );
-	            } else if (theData.temp && theData.location) {
+	            } else if (theData.temp && theData.loc) {
 	                return React.createElement(WeatherMessage, { weatherData: theData });
 	            }
 	        }
@@ -26758,7 +26789,7 @@
 	        "h3",
 	        { className: "text-center" },
 	        "The City is: ",
-	        props.weatherData.location,
+	        props.weatherData.loc,
 	        ", the Temprature is ",
 	        props.weatherData.temp
 	    );
@@ -28429,7 +28460,7 @@
 	                null,
 	                React.createElement(
 	                    Link,
-	                    { to: '/?location=Beijing' },
+	                    { to: '/?loc=Beijing' },
 	                    'Beijing, China'
 	                )
 	            ),
@@ -28438,7 +28469,7 @@
 	                null,
 	                React.createElement(
 	                    Link,
-	                    { to: '/?location=Toronto' },
+	                    { to: '/?loc=Toronto' },
 	                    'Toronto, Canada'
 	                )
 	            )

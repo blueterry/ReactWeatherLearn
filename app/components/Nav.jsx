@@ -3,9 +3,16 @@ var {Link, IndexLink} = require('react-router');
 //IndexLink 对应 IndexRoute
 
 var Nav = React.createClass({
+
     onSearch :function (e){
         e.preventDefault();
-        alert('Not yet wired up!');
+        var loc = this.refs.city.value;
+        var encodedLoc = encodeURIComponent(loc);
+
+        if(loc.length > 0){
+            this.refs.city.value = '';
+            window.location.hash = "#/?loc=" + encodedLoc;
+        }        
     },
     render: function(){
         return (
@@ -28,7 +35,7 @@ var Nav = React.createClass({
                     <form action="" onSubmit={this.onSearch}>
                         <ul className="menu">
                             <li>
-                                <input type="search" placeholder="Search Weather by City" />
+                                <input type="search" ref="city" placeholder="Search Weather by City" />
                             </li>
                             <li><input type="submit" className="button" value="Get Weather"/></li>
                         </ul>                    

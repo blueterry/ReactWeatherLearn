@@ -16,10 +16,10 @@ var Examples = () => {
             <p>Here are a few example location to try out:</p>
             <ol>
                 <li>
-                    <Link to='/?location=Beijing'>Beijing, China</Link>
+                    <Link to='/?loc=Beijing'>Beijing, China</Link>
                 </li>
                 <li>
-                    <Link to='/?location=Toronto'>Toronto, Canada</Link>
+                    <Link to='/?loc=Toronto'>Toronto, Canada</Link>
                 </li>
             </ol>
         </div>
