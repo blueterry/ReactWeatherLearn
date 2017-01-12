@@ -26502,11 +26502,14 @@
 	            null,
 	            React.createElement(Nav, null),
 	            React.createElement(
-	                'h2',
-	                null,
-	                'Main Component'
-	            ),
-	            this.props.children
+	                'div',
+	                { className: 'row' },
+	                React.createElement(
+	                    'div',
+	                    { className: 'columns medium-6 large-4 small-centered' },
+	                    this.props.children
+	                )
+	            )
 	        );
 	    }
 	});
@@ -26662,9 +26665,9 @@
 	            'div',
 	            null,
 	            React.createElement(
-	                'h3',
-	                null,
-	                'Weather Component'
+	                'h1',
+	                { className: 'text-center' },
+	                'Get Weather'
 	            ),
 	            React.createElement(WeatherForm, { onSearch: this.handleSearch }),
 	            renderMessage()
@@ -26705,7 +26708,7 @@
 	                React.createElement('input', { type: 'text', ref: 'location' }),
 	                React.createElement(
 	                    'button',
-	                    null,
+	                    { className: 'button expanded hollow' },
 	                    'Get Weather'
 	                )
 	            )
@@ -26719,7 +26722,7 @@
 /* 244 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	var React = __webpack_require__(8);
 
@@ -26735,11 +26738,11 @@
 	*/
 	var WeatherMessage = function WeatherMessage(props) {
 	    return React.createElement(
-	        'h3',
-	        null,
-	        'The City is: ',
+	        "h3",
+	        { className: "text-center" },
+	        "The City is: ",
 	        props.weatherData.location,
-	        ', the Temprature is ',
+	        ", the Temprature is ",
 	        props.weatherData.temp
 	    );
 	};
@@ -28268,7 +28271,7 @@
 /* 271 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	var React = __webpack_require__(8);
 	/* 
@@ -28291,17 +28294,17 @@
 	}*/
 	var About = function About() {
 	    return React.createElement(
-	        'div',
+	        "div",
 	        null,
 	        React.createElement(
-	            'h3',
-	            null,
-	            'About'
+	            "h1",
+	            { className: "text-center" },
+	            "About"
 	        ),
 	        React.createElement(
-	            'p',
+	            "p",
 	            null,
-	            'This is about paragraph'
+	            "This is about paragraph"
 	        )
 	    );
 	};
@@ -28315,6 +28318,9 @@
 	'use strict';
 
 	var React = __webpack_require__(8);
+
+	var _require = __webpack_require__(185),
+	    Link = _require.Link;
 	/*
 	var Examples = React.createClass({
 	    render: function(){
@@ -28324,19 +28330,43 @@
 	    }
 	});
 	*/
+
+
 	var Examples = function Examples() {
 	    return React.createElement(
 	        'div',
 	        null,
 	        React.createElement(
 	            'h3',
-	            null,
+	            { className: 'text-center' },
 	            'Examples'
 	        ),
 	        React.createElement(
 	            'p',
 	            null,
-	            'Welcome to GitHub'
+	            'Here are a few example location to try out:'
+	        ),
+	        React.createElement(
+	            'ol',
+	            null,
+	            React.createElement(
+	                'li',
+	                null,
+	                React.createElement(
+	                    Link,
+	                    { to: '/?location=Beijing' },
+	                    'Beijing, China'
+	                )
+	            ),
+	            React.createElement(
+	                'li',
+	                null,
+	                React.createElement(
+	                    Link,
+	                    { to: '/?location=Toronto' },
+	                    'Toronto, Canada'
+	                )
+	            )
 	        )
 	    );
 	};
